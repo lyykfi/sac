@@ -6,10 +6,6 @@ body {
 	padding-left: 10px;
 }
 
-#header {
-
-}
-
 #side-menu {
 	margin-top: 18px;
 	position: fixed;
@@ -17,12 +13,24 @@ body {
 
 #content {
 	#data-table {
+    #data-search-input {
+      padding-top: 10px;
+      vertical-align: middle;
+      padding-bottom: 5px;
+      input {
+        margin-bottom: 2px;
+      }
+      i {
+        padding-right: 5px;
+      }
+    }
 		#crud-buttons {
 			position: fixed;
 			background-color: white;
 			width: 100%;
 			top: 75px;
 			z-index: 999;
+      padding-bottom: 3px;
 			#delete {
 				color: red;
 			}
@@ -40,13 +48,13 @@ body {
 			}
 			.btn-toolbar {
 				float: left;
+        margin: 0;
 			}
 			#edit-alert {
 				display: none;
 				width: 600px;
 				padding-right: 10px;
 				margin-left: 20px;
-				padding-top: 5px;
 				font-size: 0.9em;
 				background-color: white;
 				&.active {
@@ -55,17 +63,48 @@ body {
 				&.alert {
 					margin-bottom: 0px;
 				}
+        .alert {
+          &.alert-info {
+            padding: 5px 35px 4px 14px;
+            margin-bottom: 0px;
+          }
+        }
 			}
+      i {
+        &.icon-trash {
+          color: black;
+          padding-right: 10px;
+        }
+        &.icon-edit {
+          color: black;
+          padding-right: 10px;
+        }
+        &.icon-file {
+          color: black;
+          padding-right: 10px;
+        }
+        &.icon-upload-alt {
+          color: black;
+          padding-right: 10px;
+        }
+        &.icon-user {
+          color: black;
+          padding-right: 10px;
+        }
+      }
 		}
 		div {
 			table {
-				margin-top: 110px;
 				font-size: 0.9em;
 				table-layout: auto;
 				word-wrap: break-word;
+        margin-top: 80px;
 				th {
 					font-size: 1em;
 					min-width: 10px;
+          i {
+            margin-left: 5px;
+          }
 				}
 				td {
 					min-width: 10px;
@@ -117,12 +156,31 @@ body {
 }
 
 #data-search-input {
+  padding-top: 5px;
   position: fixed;
   width: 100%;
-  top: 45px;
+  top: 40px;
   z-index: 999;
+  background-color: white;
 }
 
 #delete-confirm {
 	z-index: 99999;
+}
+
+#loading.modal.hide {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  text-align: center;
+  h4 {
+    color: white;
+    font-weight: 200;
+  }
+  .right {
+    text-align: right;
+  }
+  .left {
+    text-align: left;
+  }
 }

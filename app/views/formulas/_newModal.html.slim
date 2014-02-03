@@ -1,0 +1,15 @@
+#newModal.modal.hide.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+  .modal-header
+    button.close aria-hidden="true" data-dismiss="modal" type="button"
+    h3#newModalLabel Создание формулы
+  .modal-body
+		= simple_form_for @formula, remote: true, html: {class: 'form-horizontal'} do |f|
+			= f.error_notification
+			= f.input :name, label: 'Наименование'
+			= f.error :base
+			.modal-footer
+				.btn-toolbar.pull-right
+					.btn-group
+						button.btn.btn-primary type="submit" Сохранить
+					.btn-group
+						button.btn aria-hidden="true" data-dismiss="modal" Отмена

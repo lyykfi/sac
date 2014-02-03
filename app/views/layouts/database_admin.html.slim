@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title SacMiddle-Database-Admin
+    = load_netzke
+    = stylesheet_link_tag "database_admin", :media => "all"
+    = csrf_meta_tags
+  body
+    .wrapper
+      - if signed_in?
+        #header
+          = render 'shared/header'
+        #content
+          = yield
+        #footer
+      - else
+        = yield

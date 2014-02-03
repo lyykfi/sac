@@ -1,35 +1,31 @@
+#data-search-input
+  = render 'shim/search'
 #crud-buttons
-	.btn-toolbar
-		.btn-group
-			-if can? :create, model
-			  button.btn#create
-				  |Создать
-			-if can? :update, model
-			  button.btn#edit data-toggle='button' type='button'
-				  |Править
-			-if can? :destroy, model
-			  button.btn#delete
-				  |Удалить
-		.btn-group
-			button.btn.dropdown-toggle data-toggle='dropdown'
-				|Импорт&nbsp;
-				span.caret
-			ul.dropdown-menu
-				li = link_to 'xls'
-				li = link_to 'csv'
-		.btn-group
-			button.btn.dropdown-toggle data-toggle='dropdown'
-				|Экспорт&nbsp;
-				span.caret
-			ul.dropdown-menu
-				li = link_to 'xls'
-				li = link_to 'csv'
-				li = link_to 'xml'
-				li = link_to 'json'
-	#edit-alert
-		.alert.alert-info
-			/button.close type='button' data-dismiss='alert' ×
-			strong Внимание!&nbsp;
-			| Вы перешли в режим правки. Кликните на поле в таблице для изменения.
-	#search
-	 -#= render 'shim/search'
+  .btn-toolbar
+    .btn-group
+      - if can? :create, model
+        a.btn#create
+          i.icon-file
+          |Создать
+      - if can? :update, model
+        a.btn#edit data-toggle='button' type='button'
+          i.icon-edit
+          |Править
+      - if can? :destroy, model
+        a.btn#delete
+          i.icon-trash
+          |Удалить
+    .btn-group
+      a.btn.dropdown-toggle data-toggle='dropdown'
+        i.icon-upload-alt
+        |Экспорт&nbsp;
+        span.caret
+      ul.dropdown-menu
+        li = link_to 'xls', controller: model.to_s.tableize, action: 'index', format: :xls
+        li = link_to 'csv', controller: model.to_s.tableize, action: 'index', format: :csv
+        li = link_to 'xml', controller: model.to_s.tableize, action: 'index', format: :xml
+        li = link_to 'json', controller: model.to_s.tableize, action: 'index', format: :json
+  #edit-alert
+    .alert.alert-info
+      strong Внимание!&nbsp;
+      |Вы перешли в режим правки. Кликните на поле в таблице для изменения.

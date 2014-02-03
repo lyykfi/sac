@@ -1,13 +1,9 @@
 class SubjectsController < ApplicationController
-  # GET /subjects
-  # GET /subjects.json
+  # before_filter :set_header#, :only => [:index]
+
   def index
     @subjects = Subject.all
-
-    respond_to do |format|
-	    format.html
-	    format.json {render json: @subjects}
-    end
+    # gon.rabl 'app/views/subjects/index.json.rabl', as: :subjects
   end
 
   # GET /subjects/1
@@ -16,8 +12,8 @@ class SubjectsController < ApplicationController
     @subject = Subject.find(params[:id])
 
     respond_to do |format|
-	    format.html
-	    format.json {render json: @subject}
+      format.html
+      format.json {render json: @subject}
     end
   end
 
@@ -63,36 +59,52 @@ class SubjectsController < ApplicationController
   end
 
   def parent
-		subject = Subject.find(params[:id])
-		if !subject.is_country?
-	    render json: subject.parent
-		else
-			render json: []
-		end
+    subject = Subject.find(params[:id])
+    unless subject.parent.blank?
+      @parent = subject.parent
+    else
+      render json: {}
+    end
+    # if !subject.is_country?
+    #   # render json: subject.parent
+    # else
+    #   render json: []
+    # end
   end
 
   def children
-	  render json: Subject.find(params[:id]).children
+    @children = Subject.find(params[:id]).children
+    # gon.rabl 'app/views/subjects/children.json.rabl', as: :children
+    # render json: Subject.find(params[:id]).children
   end
 
   def subtree
-	  render json: Subject.find(params[:id]).subtree
+    render json: Subject.find(params[:id]).subtree
   end
 
   def countries
-	  render json: Subject.countries
+    render json: Subject.countries
   end
 
   def districts
-	  render json: Subject.districts
+    @subjects = Subject.districts
+    # render json: Subject.districts
   end
 
   def regions
-	  render json: Subject.regions
+    render json: Subject.regions
   end
 
   def import
-	  Subject.import(params[:file])
-	  redirect_to root_url
+    Subject.import(params[:file])
+    redirect_to root_url
   end
+
+  def show_map
+    render json: Subject.show_color_map(params[:id_parameter], params[:id], params[:year])
+  end
+
+  # def set_header
+  #   response.headers['Access-Control-Allow-Origin'] = '*'
+  # end
 end

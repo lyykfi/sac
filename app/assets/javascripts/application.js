@@ -13,9 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.resizable
+//= require jquery.ui.datepicker
 //= require jquery.purr
+//= require jquery.caret
 //= require bootstrap
 //= require bootstrap-confirm
-//= require jquery-ui
+//= require best_in_place
+//= require best_in_place.purr
 //= require best_in_place
 //= require_tree .
+//

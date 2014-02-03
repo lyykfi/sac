@@ -1,14 +1,17 @@
-= render 'shim/crud_buttons'
-.divider
-div
-	table.table.table-striped.table-bordered#table
-		thead
-			tr
-				th.column-header = check_box_tag 'check-header', -1
-				th.column-header = sortable('position', 'Позиция')
-				th.column-header = sortable('name', 'Наименование')
-				th.column-header = sortable('short_name', 'Краткое наименование')
-		tbody
-			= render @groups
+-if can? :read, Group
+  = render partial: 'shim/crud_buttons', locals: {model: Group}
+  div
+    table.table.table-striped.table-bordered#table
+      thead
+        tr
+          th.column-header = check_box_tag 'check-header', -1
+          th.column-header
+            = sortable('position', 'Позиция')
+          th.column-header
+            = sortable('name', 'Наименование')
+          th.column-header
+            = sortable('short_name', 'Краткое наименование')
+      tbody
+        = render @groups
 
-= will_paginate @groups
+  = will_paginate @groups

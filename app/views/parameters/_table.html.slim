@@ -1,0 +1,23 @@
+-if can? :read, Parameter
+  = render partial: 'shim/crud_buttons', locals: {model: Parameter}
+  div
+    table.table.table-striped.table-bordered#table
+      thead
+        tr
+          th.column-header = check_box_tag 'check-header', -1
+          th.column-header
+            = sortable('position', 'Позиция')
+          th.column-header
+            = sortable('name', 'Наименование')
+          th.column-header
+            = sortable('short_name', 'Краткое наименование')
+          th.column-header
+            = sortable('group_id', 'Группа')
+          /th.column-header
+            /= sortable('formula_id', 'Формула')
+          th.column-header
+            = sortable('uom_id', 'Ед. измерения')
+      tbody
+        = render @parameters
+
+  = will_paginate @parameters

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130328175626) do
+ActiveRecord::Schema.define(:version => 20130519110112) do
 
   create_table "event_statuses", :force => true do |t|
     t.string   "name"
@@ -34,15 +34,16 @@ ActiveRecord::Schema.define(:version => 20130328175626) do
     t.text     "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.datetime "deleted_at"
   end
 
   create_table "groups", :force => true do |t|
     t.text     "name"
     t.string   "short_name"
     t.integer  "position"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "is_deleted", :default => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.datetime "deleted_at"
   end
 
   create_table "param_levels", :force => true do |t|
@@ -53,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20130328175626) do
     t.string   "color"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.datetime "deleted_at"
   end
 
   create_table "param_presets", :force => true do |t|
@@ -63,6 +65,7 @@ ActiveRecord::Schema.define(:version => 20130328175626) do
     t.float    "up_preset"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.datetime "deleted_at"
   end
 
   create_table "param_refs", :force => true do |t|
@@ -88,7 +91,21 @@ ActiveRecord::Schema.define(:version => 20130328175626) do
     t.float    "val_string"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.datetime "deleted_at"
   end
+
+  create_table "param_values", :force => true do |t|
+    t.float    "val_numeric", :default => 0.0,    :null => false
+    t.string   "color",       :default => "blue", :null => false
+    t.integer  "year",        :default => 2012,   :null => false
+    t.integer  "param_id"
+    t.integer  "subject_id"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
+  add_index "param_values", ["param_id"], :name => "index_param_values_on_param_id"
+  add_index "param_values", ["subject_id"], :name => "index_param_values_on_subject_id"
 
   create_table "parameters", :force => true do |t|
     t.integer  "group_id"
@@ -97,16 +114,20 @@ ActiveRecord::Schema.define(:version => 20130328175626) do
     t.text     "name"
     t.string   "short_name"
     t.integer  "position"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "is_deleted", :default => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.datetime "deleted_at"
   end
 
-  create_table "roles", :force => true do |t|
-    t.string   "name",       :default => "", :null => false
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+  create_table "params", :force => true do |t|
+    t.string   "name",       :null => false
+    t.integer  "level",      :null => false
+    t.integer  "uom_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
+
+  add_index "params", ["uom_id"], :name => "index_params_on_uom_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name",       :default => "", :null => false
@@ -121,14 +142,20 @@ ActiveRecord::Schema.define(:version => 20130328175626) do
     t.integer  "district_id"
     t.text     "name"
     t.string   "short_name"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.integer  "region_id"
+    t.string   "map_basefilename"
+    t.string   "map_basefilename_west"
+    t.string   "map_basefilename_central"
+    t.string   "map_basefilename_east"
   end
 
   create_table "uoms", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.datetime "deleted_at"
   end
 
   create_table "users", :force => true do |t|

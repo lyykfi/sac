@@ -1,0 +1,15 @@
+-#TODO: make helper
+tr
+  td = check_box_tag "param_preset_ids[]", param_preset.id, false, class: 'check-row'
+  - if can? :update, ParamPreset
+    td = best_in_place_if (@editable && !ParamLevel.is_restricted?(current_user, :subject_id)), param_preset, :subject_id, display_as: :subject, type: :select, collection: Subject.select('id,short_name').map{|x| [x.id,x.short_name]}, html_attrs: {style: "width: 100%;"}
+    td = best_in_place_if (@editable && !ParamLevel.is_restricted?(current_user, :parameter_id)), param_preset, :parameter_id, display_as: :parameter, type: :select, collection: Parameter.select('id,short_name').map{|x| [x.id,x.short_name]}, html_attrs: {style: "width: 100%;"}
+    td = best_in_place_if (@editable && !ParamLevel.is_restricted?(current_user, :down_preset)), param_preset, :down_preset, html_attrs: {style: "width: 100%;"}
+    td = best_in_place_if (@editable && !ParamLevel.is_restricted?(current_user, :up_preset)), param_preset, :up_preset, html_attrs: {style: "width: 100%;"}
+    td = best_in_place_if (@editable && !ParamLevel.is_restricted?(current_user, :date_time)), param_preset, :date_time, type: :date, html_attrs: {style: "width: 100%;"}
+  - else
+    td = param_val.subject
+    td = param_val.parameter
+    td = param_val.down_presest
+    td = param_val.up_preset
+    td = param_val.date_time

@@ -1,16 +1,15 @@
-
-
+-#TODO: make helper
 tr
-  td = check_box(param_val.id, 'selected', {class: 'check-row'})
-  -if can? :update, ParamVal
-    td = best_in_place_if @editable, param_val, :parameter_id, html_attrs: {style: "width: 100%;"}
-    td = best_in_place_if @editable, param_val, :subject_id, html_attrs: {style: "width: 100%;"}
-    td = best_in_place_if @editable, param_val, :val_numeric, html_attrs: {style: "width: 100%;"}
-    td = best_in_place_if @editable, param_val, :val_string, type: :textarea, html_attrs: {style: "width: 100%;"}
+  td = check_box_tag "param_val_ids[]", param_val.id, false, class: 'check-row'
+  - if can? :update, ParamVal
+    td = best_in_place_if (@editable && !ParamVal.is_restricted?(current_user, :subject_id)), param_val, :subject_id, display_as: :subject, type: :select, collection: Subject.select('id,short_name').map{|x| [x.id,x.short_name]}, html_attrs: {style: "width: 100%;"}
+    td = best_in_place_if (@editable && !ParamVal.is_restricted?(current_user, :parameter_id)), param_val, :parameter_id, display_as: :parameter, type: :select, collection: Parameter.select('id,short_name').map{|x| [x.id,x.short_name]}, html_attrs: {style: "width: 100%;"}
+    td = best_in_place_if (@editable && !ParamVal.is_restricted?(current_user, :date_time)), param_val, :date_time, type: :date, html_attrs: {style: "width: 100%;"}
+    td = best_in_place_if (@editable && !ParamVal.is_restricted?(current_user, :val_numeric)), param_val, :val_numeric, html_attrs: {style: "width: 100%;"}
+    td = best_in_place_if (@editable && !ParamVal.is_restricted?(current_user, :val_string)), param_val, :val_string, html_attrs: {style: "width: 100%;"}
+  - else
+    td = param_val.subject
+    td = param_val.parameter
     td = param_val.date_time
-  -else
-    td = param_val.parameter_id
-    td = param_val.subject_id
     td = param_val.val_numeric
     td = param_val.val_string
-    td = param_val.date_time

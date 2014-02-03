@@ -1,0 +1,177 @@
+-- MySQL dump 10.13  Distrib 5.5.29, for Linux (x86_64)
+--
+-- Host: localhost    Database: sac_dev
+-- ------------------------------------------------------
+-- Server version	5.5.29
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `groups`
+--
+
+DROP TABLE IF EXISTS `groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text COLLATE utf8_unicode_ci,
+  `short_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `position` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `groups`
+--
+
+LOCK TABLES `groups` WRITE;
+/*!40000 ALTER TABLE `groups` DISABLE KEYS */;
+INSERT INTO `groups` VALUES (1,'','ГП',NULL,'2013-03-25 11:28:25','2013-03-25 11:28:25',NULL);
+/*!40000 ALTER TABLE `groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `param_levels`
+--
+
+DROP TABLE IF EXISTS `param_levels`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `param_levels` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parameter_id` int(11) DEFAULT NULL,
+  `subject_id` int(11) DEFAULT NULL,
+  `down_level` float DEFAULT NULL,
+  `up_level` float DEFAULT NULL,
+  `color` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `param_levels`
+--
+
+LOCK TABLES `param_levels` WRITE;
+/*!40000 ALTER TABLE `param_levels` DISABLE KEYS */;
+INSERT INTO `param_levels` VALUES (1,1,100,0,200000,'#7fff7f','0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(2,2,100,0,22000,'#7fff7f','0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(3,3,100,200,500,'#7fff7f','0000-00-00 00:00:00','0000-00-00 00:00:00',NULL);
+/*!40000 ALTER TABLE `param_levels` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `param_subjects`
+--
+
+DROP TABLE IF EXISTS `param_subjects`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `param_subjects` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parameter_id` int(11) DEFAULT NULL,
+  `subject_id` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `param_subjects`
+--
+
+LOCK TABLES `param_subjects` WRITE;
+/*!40000 ALTER TABLE `param_subjects` DISABLE KEYS */;
+INSERT INTO `param_subjects` VALUES (1,1,100,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(2,1,101,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(3,1,102,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(4,1,103,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(5,1,104,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(6,1,105,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(7,1,106,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(8,1,107,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(9,1,108,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(10,2,100,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(11,2,101,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(12,2,102,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(13,2,103,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(14,2,104,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(15,2,105,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(16,2,106,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(17,2,107,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(18,2,108,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(19,3,101,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(20,3,102,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(21,3,104,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(22,3,105,'0000-00-00 00:00:00','0000-00-00 00:00:00'),(23,3,108,'0000-00-00 00:00:00','0000-00-00 00:00:00');
+/*!40000 ALTER TABLE `param_subjects` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `param_vals`
+--
+
+DROP TABLE IF EXISTS `param_vals`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `param_vals` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parameter_id` int(11) DEFAULT NULL,
+  `subject_id` int(11) DEFAULT NULL,
+  `date_time` datetime DEFAULT NULL,
+  `val_numeric` float DEFAULT NULL,
+  `val_string` float DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `param_vals`
+--
+
+LOCK TABLES `param_vals` WRITE;
+/*!40000 ALTER TABLE `param_vals` DISABLE KEYS */;
+INSERT INTO `param_vals` VALUES (1,1,100,'2012-01-01 00:00:00',451669,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(2,1,101,'2012-01-01 00:00:00',116478,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(3,1,102,'2012-01-01 00:00:00',64994,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(4,1,103,'2012-01-01 00:00:00',38742,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(5,1,104,'2012-01-01 00:00:00',22572,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(6,1,105,'2012-01-01 00:00:00',89593,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(7,1,106,'2012-01-01 00:00:00',35818,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(8,1,107,'2012-01-01 00:00:00',54010,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(9,1,108,'2012-01-01 00:00:00',16016,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(10,1,100,'2011-01-01 00:00:00',322564,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(11,1,101,'2011-01-01 00:00:00',93968,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(12,1,102,'2011-01-01 00:00:00',48731,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(13,1,103,'2011-01-01 00:00:00',22571,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(14,1,104,'2011-01-01 00:00:00',19122,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(15,1,105,'2011-01-01 00:00:00',46642,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(16,1,106,'2011-01-01 00:00:00',21127,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(17,1,107,'2011-01-01 00:00:00',43102,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(18,1,108,'2011-01-01 00:00:00',12586,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(19,2,100,'2012-01-01 00:00:00',68915,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(20,2,101,'2012-01-01 00:00:00',21277,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(21,2,102,'2012-01-01 00:00:00',9151,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(22,2,103,'2012-01-01 00:00:00',4925,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(23,2,104,'2012-01-01 00:00:00',5428,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(24,2,105,'2012-01-01 00:00:00',13740,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(25,2,106,'2012-01-01 00:00:00',4826,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(26,2,107,'2012-01-01 00:00:00',6408,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(27,2,108,'2012-01-01 00:00:00',2442,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(28,2,100,'2011-01-01 00:00:00',54728,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(29,2,101,'2011-01-01 00:00:00',18236,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(30,2,102,'2011-01-01 00:00:00',7102,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(31,2,103,'2011-01-01 00:00:00',3680,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(32,2,104,'2011-01-01 00:00:00',4517,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(33,2,105,'2011-01-01 00:00:00',9558,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(34,2,106,'2011-01-01 00:00:00',3166,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(35,2,107,'2011-01-01 00:00:00',5475,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(36,2,108,'2011-01-01 00:00:00',2244,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(37,3,101,'2012-01-01 00:00:00',302.2,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(38,3,102,'2012-01-01 00:00:00',475.8,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(39,3,104,'2012-01-01 00:00:00',237.7,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(40,3,105,'2012-01-01 00:00:00',300.2,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(41,3,108,'2012-01-01 00:00:00',255.6,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL);
+/*!40000 ALTER TABLE `param_vals` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `parameters`
+--
+
+DROP TABLE IF EXISTS `parameters`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `parameters` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) DEFAULT NULL,
+  `formula_id` int(11) DEFAULT NULL,
+  `uom_id` int(11) DEFAULT NULL,
+  `name` text COLLATE utf8_unicode_ci,
+  `short_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `position` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `parameters`
+--
+
+LOCK TABLES `parameters` WRITE;
+/*!40000 ALTER TABLE `parameters` DISABLE KEYS */;
+INSERT INTO `parameters` VALUES (1,1,NULL,14,'Пролечено больных по ВМП',NULL,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(2,1,NULL,14,'Пролечено по ВМП детей',NULL,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL),(3,1,NULL,4,'Обеспеченность населения высокотехнологичной медицинской помощью',NULL,NULL,'0000-00-00 00:00:00','0000-00-00 00:00:00',NULL);
+/*!40000 ALTER TABLE `parameters` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2013-05-20 16:46:45

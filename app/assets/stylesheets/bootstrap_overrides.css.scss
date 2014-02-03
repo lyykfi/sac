@@ -25,3 +25,49 @@ $bootstrap_grey_lighter: #f9f9f9;
 		}
 	}
 }
+
+.navbar .nav > li {
+  &:hover {
+    background-color: $bootstrap_grey_lighter;
+    color: black;
+  }
+}
+
+.navbar .nav > li.dropdown.user {
+  &.open {
+    background-color: $bootstrap_grey_lighter;
+    a {
+      background-color: transparent;
+    }
+  }
+  i, a {
+    display: inline-block;
+    color: $bootstrap_grey;
+  }
+  a {
+    padding-left: 0px;
+    padding-right: 15px;
+    &:hover {
+      color: black;
+    }
+  }
+  i {
+    padding-right: 0px;
+  }
+  ul.user-menu {
+    margin-right: 15px;
+    li.user-menu-item {
+      padding-left: 10px;
+      &:hover {
+        background-color: $bootstrap_grey_lighter;
+      }
+      a {
+        background-image: none;
+        background-color: transparent;
+        &:hover {
+          color: $bootstrap_blue;
+        }
+      }
+    }
+  }
+}

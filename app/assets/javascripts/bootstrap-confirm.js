@@ -2,20 +2,30 @@
     $.fn.extend({
         //pass the options variable to the function
         confirmModal: function (options) {
+            var defaults = {
+              heading: 'Please confirm',
+              body:'Body contents',
+              callback: null,
+              okButtonText: 'Удалить',
+              cancelButtonText: 'Отмена',
+              enableCancel: true,
+              enableOk: true
+            };
+
             var html = '<div class="modal" id="confirmContainer"><div class="modal-header"><a class="close" data-dismiss="modal">×</a>' +
             '<h3>#Heading#</h3></div><div class="modal-body">' +
-            '#Body#</div><div class="modal-footer">' +
-            '<a href="#" class="btn btn-primary" id="confirmYesBtn">Удалить</a>' +
-            '<a href="#" class="btn" data-dismiss="modal">Отмена</a></div></div>';
+            '#Body#</div><div class="modal-footer">';
 
-            var defaults = {
-                heading: 'Please confirm',
-                body:'Body contents',
-                callback : null
-            };
-            
             var options = $.extend(defaults, options);
-            html = html.replace('#Heading#',options.heading).replace('#Body#',options.body);
+
+            if (options.enableOk) {
+              html += '<a href="#" class="btn btn-primary" id="confirmYesBtn">#okButtonText#</a>';
+            }
+            if (options.enableCancel) {
+              html += '<a href="#" class="btn" data-dismiss="modal">#cancelButtonText#</a></div></div>';
+            }
+
+            html = html.replace('#Heading#',options.heading).replace('#Body#',options.body).replace('#okButtonText#',options.okButtonText).replace('#cancelButtonText#',options.cancelButtonText);
             $(this).html(html);
             $(this).modal('show');
             var context = $(this); 

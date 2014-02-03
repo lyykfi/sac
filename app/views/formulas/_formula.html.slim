@@ -1,3 +1,6 @@
 tr
-	td = check_box(formula.id, 'selected', {class: 'check-row'})
-	td = formula.name
+  td = check_box_tag "formula_ids[]", formula.id, false, class: 'check-row'
+  - if can? :update, Formula
+    td = best_in_place_if (@editable && !Formula.is_restricted?(current_user, :name)), formula, :name, html_attrs: {style: "width: 100%;"}
+  - else
+    td = formula.name

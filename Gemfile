@@ -18,38 +18,50 @@ gem 'draper', '~> 1.0'
 gem 'coffee-rails', '3.2.2'
 gem 'uglifier', '1.3.0'
 gem 'slim-rails', '1.1.0'
+gem 'best_in_place', '~> 2.1.0'
+
+gem 'draper-cancan'
+gem 'acts_as_paranoid', '~>0.4.0'
+
+# for JSON
+gem 'rabl-rails'
+gem 'gon'
+
+# admin
+gem 'netzke-core'
+gem 'netzke-basepack'
 
 group :assets do
   gem 'sass-rails', '~> 3.2'
   gem 'bootstrap-sass', '~> 2.3.1.0'
   gem 'therubyracer', '0.11.4'
   gem 'font-awesome-sass-rails', '3.0.2.2'
-	gem 'roo', '1.10.3'
+  gem 'roo', '1.10.3'
 end
 
 group :development do
-	gem 'better_errors'
-	gem 'binding_of_caller'
-	gem 'meta_request'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
+  gem 'pry-rails'
 end
 
 group :development, :test do
-	gem 'sqlite3', '1.3.7'
-	gem 'rspec-rails', '2.13.0'
+  gem 'sqlite3', '1.3.7'
+  gem 'rspec-rails', '2.13.0'
 end
 
 group :test do
-	gem 'capybara', '2.0.2'
-	gem 'cucumber-rails'
-	gem 'database_cleaner'
+  gem 'capybara', '2.0.2'
+  gem 'cucumber-rails'
+  gem 'database_cleaner'
 end
 
 group :production do
-
+  gem 'mysql2', '0.3.11'
 end
 
-group :development, :production do
-	gem 'mysql2', '0.3.11'
+group :development do
+  gem 'mysql2', '0.3.11'
+  # gem 'pg'
 end
-
-gem 'best_in_place'

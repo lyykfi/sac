@@ -1,0 +1,21 @@
+-if can? :read, ParamPreset
+  = render partial: 'shim/crud_buttons', locals: {model: ParamPreset}
+  div
+    table.table.table-striped.table-bordered#table
+      thead
+        tr
+          th.column-header = check_box_tag 'check-header', -1
+          th.column-header
+            = sortable('parameter', 'Параметр')
+          th.column-header
+            = sortable('subject', 'Регион')
+          th.column-header
+            = sortable('down_preset', 'Нижняя уставка')
+          th.column-header
+            = sortable('up_preset', 'Верхняя уставка')
+          th.column-header
+            = sortable('date_time', 'Дата')
+      tbody
+        = render @param_presets
+
+  = will_paginate @param_presets

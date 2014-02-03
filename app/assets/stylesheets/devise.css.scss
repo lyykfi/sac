@@ -5,5 +5,31 @@
      height: 13px;
      width:  13px; 
   }
+}
 
+.new_user {
+  padding-left: 40px;
+  label {
+    font-weight: bold;
+  }
+}
+
+.centered {
+  margin: 0 auto 0 auto;
+}
+
+.toper {
+  &.header {
+    text-align: center;
+    padding-top: 100px;
+  }
+}
+
+.container {
+  &.sign-in {
+    background-image: url('background.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 500px;
+  }
 }

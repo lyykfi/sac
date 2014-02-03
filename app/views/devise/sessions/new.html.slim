@@ -1,0 +1,15 @@
+.container.sign-in
+  .row-fluid
+    .span12
+      .toper.header
+        h2 Ситуационно-аналитический центр (АРМ)
+  .row-fluid
+    .span4
+    .span4.centered
+      = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        .form-inputs
+          = f.input :login, label: 'Логин', :required => false, :autofocus => true
+          = f.input :password, label: 'Пароль', :required => false
+          = f.input :remember_me, inline_label: 'Запомнить меня', label: false, :as => :boolean if devise_mapping.rememberable?
+          = f.button :submit, "Войти", class: 'btn-primary'
+    .span4

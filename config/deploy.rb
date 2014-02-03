@@ -1,64 +1,74 @@
 require "bundler/capistrano"
 
-server "174.129.130.28", :web, :app, :db, primary: true 
+server "54.224.205.171", :web, :app, :db, primary: true
 ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "sac.pem")]
 
 
-set :application, "sac"
-set :user, "ec2-user"
-set :use_sudo, false
-set :deploy_to, "/home/#{user}/sac"
+set :application,  "sac"
+set :user,         "ec2-user"
+set :use_sudo,     false
+set :deploy_to,    "/home/#{user}/sac"
 set :unicorn_conf, "#{deploy_to}/current/config/unicorn.rb"
-set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
-
+set :unicorn_pid,  "#{deploy_to}/shared/pids/unicorn.pid"
+set :start_cmd,    "bundle exec unicorn_rails -c #{unicorn_conf} -E #{rails_env} -D"
 
 ssh_options[:forward_agent] = true
 default_run_options[:pty] = true
 
 set :scm, "git"
-#set :repository,  "git@github.com:gitgash/#{application}.git"
-set :repository,  "/home/komar/devel/#{application}"
-set :deploy_via, :copy
-set :branch, "master"
-#set :branch, "develop"
 
-#set :deploy_via, :remote_cache
+# set :repository,  "git@github.com:gitgash/#{application}.git"
+# set :branch,      "master"
+# set :deploy_via,  :remote_cache
+
+set :repository,  ENV["HOME"] + "/projects/SitCenter/rails/sac"
+set :branch,      "mtungusov"
+
+set :deploy_via,  :copy
+# set :copy_cache, true
+set :copy_exclude, %w(.git .gitignore)
+
+# set :deploy_via, :copyset :branch, "master"
 
 set :keep_releases, 5
 
-# set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+# Setup Database
+namespace :database do
+  desc "Make link on database.yml"
+  task :yml, :roles => :app do
+    run "ln -fs #{shared_path}/database.yml #{release_path}/config/database.yml"
+  end
+end
 
-#role :web, "your web-server here"                          # Your HTTP server, Apache/etc
-#role :app, "your app-server here"                          # This may be the same as your `Web` server
-#role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
-#role :db,  "your slave db-server here"
+desc "Make link on logs dir"
+task :link_logs_dir, :roles => :app do
+  run "rm -rf #{release_path}/log; ln -s #{shared_path}/log/ #{release_path}/log"
+end
 
-# if you want to clean up old releases on each deploy uncomment this:
-#after "deploy:restart", "deploy:cleanup"
-#after "deploy:setup", "deploy:create_release_dir"
+desc "Make link on extjs dir"
+task :link_extjs_dir, :roles => :app do
+  run "ln -fs #{shared_path}/ext-4.1.1a #{release_path}/public/extjs"
+end
 
-
-# if you're still using the script/reaper helper you will need
-# these http://github.com/rails/irs_process_scripts
-
-# If you are using Passenger mod_rails uncomment this:
 namespace :deploy do
-  task :restart do
-    run "if [ -f #{unicorn_pid} ] && [ -e /proc/$(cat #{unicorn_pid}) ]; then kill -USR2 `cat #{unicorn_pid}`; else cd #{deploy_to}/current && bundle exec unicorn_rails -c #{unicorn_conf} -E #{rails_env} -D; fi"
-  end
+  desc "Start unicorn"
   task :start do
-    run "bundle exec unicorn_rails -c #{unicorn_conf} -E #{rails_env} -D"
+    run "cd #{deploy_to}/current && #{start_cmd}"
   end
+
+  desc "Stop unicorn"
   task :stop do
     run "if [ -f #{unicorn_pid} ] && [ -e /proc/$(cat #{unicorn_pid}) ]; then kill -QUIT `cat #{unicorn_pid}`; fi"
   end
-  #task :create_release_dir, :except => {:no_release => true} do
-  #  run "mkdir -p #{fetch :releases_path}"
-  #end
-#  task :start do ; end
-#  task :stop do ; end
-#  task :restart, :roles => :app, :except => { :no_release => true } do
-#    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#  end
+
+  desc "Restart unicorn"
+  task :restart do
+    run "if [ -f #{unicorn_pid} ] && [ -e /proc/$(cat #{unicorn_pid}) ]; then kill -USR2 `cat #{unicorn_pid}`; else cd #{deploy_to}/current && #{start_cmd}; fi"
+  end
 end
+
+after "deploy:update_code", :link_logs_dir
+after "deploy:update_code", :link_extjs_dir
+after "deploy:update_code", "database:yml"
+# after "database:yml",       "deploy:migrate"
+# load 'deploy/assets'

@@ -1,0 +1,19 @@
+#newModal.modal.hide.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+  .modal-header
+    button.close aria-hidden="true" data-dismiss="modal" type="button"
+    h3#newModalLabel Создание уставки параметра
+  .modal-body
+		= simple_form_for @param_preset, remote: true, html: {class: 'form-horizontal'} do |f|
+			= f.error_notification
+      = f.association :subject, label: 'Регион'
+      = f.association :parameter, label: 'Параметр'
+      = f.input :down_preset, label: 'Нижняя уставка'
+      = f.input :up_preset, label: 'Верхняя уставка'
+      = f.input :date_time, label: 'Дата'
+			= f.error :base
+			.modal-footer
+				.btn-toolbar.pull-right
+					.btn-group
+						button.btn.btn-primary type="submit" Сохранить
+					.btn-group
+						button.btn aria-hidden="true" data-dismiss="modal" Отмена

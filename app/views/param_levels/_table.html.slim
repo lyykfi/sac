@@ -1,0 +1,21 @@
+-if can? :read, ParamLevel
+  = render partial: 'shim/crud_buttons', locals: {model: ParamLevel}
+  div
+    table.table.table-striped.table-bordered#table
+      thead
+        tr
+          th.column-header = check_box_tag 'check-header', -1
+          th.column-header
+            = sortable('parameter', 'Параметр')
+          th.column-header
+            = sortable('subject', 'Регион')
+          th.column-header
+            = sortable('down_level', 'Нижний уровень')
+          th.column-header
+            = sortable('up_level', 'Верхний уровень')
+          th.column-header
+            = sortable('color', 'Цвет')
+      tbody
+        = render @param_levels
+
+  = will_paginate @param_levels

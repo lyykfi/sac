@@ -2,10 +2,7 @@
 = hidden_field_tag :sort, params[:sort]
 = hidden_field_tag :page, params[:page]
 = hidden_field_tag :editable, params[:editable]
-
-
+= hidden_field_tag :search, params[:search]
 
 #data-table
 	= render 'groups/table'
-
-/=table_flexible @groups

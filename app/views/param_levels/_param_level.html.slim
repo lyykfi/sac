@@ -1,0 +1,15 @@
+-#TODO: make helper
+tr
+  td = check_box_tag "param_level_ids[]", param_level.id, false, class: 'check-row'
+  - if can? :update, ParamLevel
+    td = best_in_place_if (@editable && !ParamLevel.is_restricted?(current_user, :subject_id)), param_level, :subject_id, display_as: :subject, type: :select, collection: Subject.select('id,short_name').map{|x| [x.id,x.short_name]}, html_attrs: {style: "width: 100%;"}
+    td = best_in_place_if (@editable && !ParamLevel.is_restricted?(current_user, :parameter_id)), param_level, :parameter_id, display_as: :parameter, type: :select, collection: Parameter.select('id,short_name').map{|x| [x.id,x.short_name]}, html_attrs: {style: "width: 100%;"}
+    td = best_in_place_if (@editable && !ParamLevel.is_restricted?(current_user, :down_level)), param_level, :down_level, html_attrs: {style: "width: 100%;"}
+    td = best_in_place_if (@editable && !ParamLevel.is_restricted?(current_user, :up_level)), param_level, :up_level, html_attrs: {style: "width: 100%;"}
+    td = best_in_place_if (@editable && !ParamLevel.is_restricted?(current_user, :color)), param_level, :color, html_attrs: {style: "width: 100%;"}
+  - else
+    td = param_val.subject
+    td = param_val.parameter
+    td = param_val.down_level
+    td = param_val.up_level
+    td = param_val.color

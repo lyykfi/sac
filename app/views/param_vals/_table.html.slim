@@ -1,18 +1,21 @@
 -if can? :read, ParamVal
   = render partial: 'shim/crud_buttons', locals: {model: ParamVal}
-
   div
-    table.table.table-striped
+    table.table.table-striped.table-bordered#table
       thead
         tr
-          th.column-header = check_box_tag 'check-header'
-          th.column-header = sortable('parameter_id', 'Номер параметра')
-          th.column-header = sortable('subject_id', 'Субъект')
-          th.column-header = sortable('val_numeric', 'Значение, цифр.')
-          th.column-header = sortable('val_string', 'Значение')
-          th.column-header = sortable('date_time', 'Дата')
+          th.column-header = check_box_tag 'check-header', -1
+          th.column-header
+            = sortable('subject', 'Регион')
+          th.column-header
+            = sortable('parameter', 'Параметр')
+          th.column-header
+            = sortable('date_time', 'Дата')
+          th.column-header
+            = sortable('val_numeric', 'Значение числовое')
+          th.column-header
+            = sortable('val_string', 'Значение текстовое')
       tbody
         = render @param_vals
 
-   
-  =will_paginate @param_vals
+  = will_paginate @param_vals

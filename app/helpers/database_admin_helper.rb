@@ -1,0 +1,2 @@
+module DatabaseAdminHelper
+end

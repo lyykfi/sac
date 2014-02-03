@@ -1,0 +1,17 @@
+-#TODO: make helper
+tr
+  td = check_box_tag "parameter_ids[]", parameter.id, false, class: 'check-row'
+  - if can? :update, Parameter
+    td.centered = best_in_place_if (@editable && !Parameter.is_restricted?(current_user, :position)), parameter, :position, html_attrs: {style: "width: 100%;"}
+    td = best_in_place_if (@editable && !Parameter.is_restricted?(current_user, :name)), parameter, :name, type: :textarea, html_attrs: {style: "width: 100%;"}
+    td = best_in_place_if (@editable && !Parameter.is_restricted?(current_user, :short_name)), parameter, :short_name, html_attrs: {style: "width: 100%;"}
+    td = best_in_place_if (@editable && !Parameter.is_restricted?(current_user, :group_id)), parameter, :group_id, display_as: :group, type: :select, collection: Group.select('id,short_name').map{|x| [x.id,x.short_name]}, html_attrs: {style: "width: 100%;"}
+    /td = best_in_place_if (@editable && !Parameter.is_restricted?(current_user, :formula_id)), parameter, :formula_id, display_as: :formula, type: :select, collection: Formula.select('id,name').map{|x| [x.id,x.name]}, html_attrs: {style: "width: 100%;"}
+    td = best_in_place_if (@editable && !Parameter.is_restricted?(current_user, :uom_id)), parameter, :uom_id, display_as: :uom, type: :select, collection: Uom.select('id,name').map{|x| [x.id,x.name]}, html_attrs: {style: "width: 100%;"}
+  - else
+    td = parameter.position
+    td = parameter.name
+    td = parameter.short_name
+    td = parameter.group
+    /td = parameter.formula
+    td = parameter.uom

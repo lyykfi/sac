@@ -1,0 +1,19 @@
+#newModal.modal.hide.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+  .modal-header
+    button.close aria-hidden="true" data-dismiss="modal" type="button"
+    h3#newModalLabel Создание уровня параметра
+  .modal-body
+		= simple_form_for @param_level, remote: true, html: {class: 'form-horizontal'} do |f|
+			= f.error_notification
+      = f.association :subject, label: 'Регион'
+      = f.association :parameter, label: 'Параметр'
+      = f.input :down_level, label: 'Нижний уровень'
+      = f.input :up_level, label: 'Верхний уровень'
+      = f.input :color, label: 'Цвет'
+			= f.error :base
+			.modal-footer
+				.btn-toolbar.pull-right
+					.btn-group
+						button.btn.btn-primary type="submit" Сохранить
+					.btn-group
+						button.btn aria-hidden="true" data-dismiss="modal" Отмена

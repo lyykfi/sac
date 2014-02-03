@@ -2,11 +2,10 @@
 
 module ApplicationHelper
 
-
 	def side_menu_items
 		items = [
 				{name: 'groups',          url: url_for(controller: 'groups'),         caption: 'Группы параметров'},
-				{name: 'formulas',        url: url_for(controller: 'formulas'),       caption: 'Формулы'},
+				#{name: 'formulas',        url: url_for(controller: 'formulas'),       caption: 'Формулы'},
 				{name: 'parameters',      url: url_for(controller: 'parameters'),     caption: 'Параметры'},
 				{name: 'param_vals',      url: url_for(controller: 'param_vals'),     caption: 'Значения параметров'},
 				{name: 'param_levels',    url: url_for(controller: 'param_levels'),   caption: 'Уровни параметров'},
@@ -26,31 +25,17 @@ module ApplicationHelper
     title ||= column.titleize
     css_class = column == sort_column ? "current #{sort_direction}" : nil
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
-    link_to title, params.merge(:sort => column, :direction => direction, :page => nil), {:class => css_class}
+
+    arrow_class = 'icon-chevron-up' if direction == 'desc'
+    arrow_class = 'icon-chevron-down' if direction == 'asc'
+    arrow_class = 'icon-nbsp' if css_class.nil?
+    (link_to title, params.merge(:sort => column, :direction => direction, :page => nil), {:class => css_class})+(content_tag :i, nil, class: arrow_class)
   end
 
-#TODO Refactor!
-#  def table_flexible(collection = {})
-#    attr_sortable = collection.first.class.attr_sortable
-#    attr_visible = collection.first.class.attr_visible
-#
-#    thead = content_tag :thead do
-#      content_tag :tr do
-#	      attr_visible << content_tag(:th, check_box_tag('check-header'))
-#        attr_visible.collect {|column| concat content_tag(:th, attr_sortable.include?(column[0]) ? sortable(column[0].to_s, column[1]) : column[1])}.join().html_safe
-#      end
-#    end
-#    tbody = content_tag :tbody do
-#      collection.collect { |elem|
-#        content_tag :tr do
-#          attr_visible.collect { |column|
-#              concat content_tag(:td, elem[column[0]])
-#          }.to_s.html_safe
-#        end
-#      }.join().html_safe
-#    end
-#    content_tag :table, :class => "table table-striped table-bordered", :id => "table" do
-#      thead.concat(tbody)
-#    end
-#  end
+  def is_accessible?(field, role)
+    clazz = field.split('.')[0]
+    method = field.split('.')[1]
+
+    !clazz.classify.constantize.restricted_fields[role].include?(method)
+  end
 end

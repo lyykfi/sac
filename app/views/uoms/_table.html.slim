@@ -1,0 +1,13 @@
+-if can? :read, Uom
+  = render partial: 'shim/crud_buttons', locals: {model: Uom}
+  div
+    table.table.table-striped.table-bordered#table
+      thead
+        tr
+          th.column-header = check_box_tag 'check-header', -1
+          th.column-header
+            = sortable('name', 'Наименование')
+      tbody
+        = render @uoms
+
+  = will_paginate @uoms

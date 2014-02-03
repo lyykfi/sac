@@ -1,0 +1,6 @@
+tr
+  td = check_box_tag "uom_ids[]", uom.id, false, class: 'check-row'
+  - if can? :update, Uom
+    td = best_in_place_if (@editable && !Uom.is_restricted?(current_user, :name)), uom, :name, html_attrs: {style: "width: 100%;"}
+  - else
+    td = uom.name

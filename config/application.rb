@@ -10,6 +10,7 @@ require 'rails/all'
 #require "sprockets/railtie"
 require 'roo'
 require 'bootstrap-sass'
+require 'csv'
 # require 'iconv'
 # require "rails/test_unit/railtie"
 
@@ -69,7 +70,7 @@ module SacMiddle
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-    
-    WillPaginate.per_page = 9
+
+    WillPaginate.per_page = 20
   end
 end
