@@ -1,11 +1,12 @@
 source 'https://rubygems.org'
 
-ruby '1.9.3'
+ruby '2.0.0'
 
 gem 'rails', '3.2.12'
 gem 'jquery-rails', '2.2.1'
 gem 'jquery-ui-rails', "~> 4.0.2"
 gem "will_paginate", "~> 3.0.4"
+gem "minitest", "~> 5.2.2"
 
 gem "capistrano", "~> 2.14.2"
 gem "unicorn", "~> 4.6.2"
