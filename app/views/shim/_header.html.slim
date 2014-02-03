@@ -1,0 +1,15 @@
+.navbar
+	.navbar-fixed-top
+		a.brand href='#' Ситуационно-аналитический центр
+		ul.nav.pull-right
+			li = link_to 'Редактор', groups_path
+			li = link_to 'Администрирование', users_path
+			li = link_to 'FAQ', '#'
+			li = link_to 'Контакты', '#'
+			li
+			  nobr
+			    = current_user.login
+			    |(
+			    = link_to "выйти", destroy_user_session_path, :method => 'delete'
+			    |)
+			  

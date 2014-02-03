@@ -1,0 +1,8 @@
+= render 'shim/crud_buttons'
+table.table.table-striped
+	thead
+		tr
+			th = check_box_tag 'check-header'
+			th Name
+	tbody
+		= render @formulas

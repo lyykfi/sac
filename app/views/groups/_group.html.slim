@@ -1,0 +1,5 @@
+tr
+	td = check_box_tag "group_ids[]", group.id, false, class: 'check-row'
+	td.centered = best_in_place_if @editable, group, :position, html_attrs: {style: "width: 100%;"}
+	td = best_in_place_if @editable, group, :name, type: :textarea, html_attrs: {style: "width: 100%;"}
+	td = best_in_place_if @editable, group, :short_name, html_attrs: {style: "width: 100%;"}

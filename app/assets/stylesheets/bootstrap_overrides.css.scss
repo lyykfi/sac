@@ -1,0 +1,27 @@
+$bootstrap_blue: #0088CC;
+$bootstrap_grey: #777777;
+$bootstrap_grey_light: #E6E6E6;
+$bootstrap_grey_lighter: #f9f9f9;
+
+.navbar-fixed-top {
+	padding-left: 10px;
+	background-color: white;
+}
+
+#side-menu {
+	.nav-pills {
+		a {
+			color: $bootstrap_grey;
+			&:hover {
+				color: $bootstrap_blue;
+				background-color: $bootstrap_grey_lighter;
+			}
+		}
+		.active {
+			a {
+				color: $bootstrap_blue;
+				background-color: $bootstrap_grey_light;
+			}
+		}
+	}
+}

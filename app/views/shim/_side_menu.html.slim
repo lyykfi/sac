@@ -1,0 +1,4 @@
+#side-menu
+	ul.nav.nav-pills.nav-stacked
+		- side_menu_items.each do |item|
+			li = link_to item[:caption], item[:url]

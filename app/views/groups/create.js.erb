@@ -1,0 +1,29 @@
+<%- if @group.errors.any? %>
+	console.log('Error');
+	$('#modal').html("<%=escape_javascript(render partial: 'groups/newModal')%>");
+<%- else %>
+	console.log('Created');
+	$('#newModal').modal('hide');
+	$('#table').prepend('<%= escape_javascript(render(@group)) %>');
+
+	var initCrudCheckboxes;
+
+	initCrudCheckboxes = function() {
+		$('#check-header').click(function() {});
+		$(this).closest('table').find('.check-row').prop('checked', this.checked);
+		if (this.checked) {
+			return $('.check-row').addClass('checked');
+		} else {
+			return $('.check-row').removeClass('checked');
+		}
+	};
+
+	$('.check-row').click(function() {
+		if (this.checked) {
+			return $(this).addClass('checked');
+		} else {
+			return $(this).removeClass('checked');
+		}
+	});
+	initCrudCheckboxes();
+<%- end %>

@@ -1,0 +1,128 @@
+$bootstrap_blue: #0088CC;
+$bootstrap_grey: #777777;
+
+body {
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+#header {
+
+}
+
+#side-menu {
+	margin-top: 18px;
+	position: fixed;
+}
+
+#content {
+	#data-table {
+		#crud-buttons {
+			position: fixed;
+			background-color: white;
+			width: 100%;
+			top: 75px;
+			z-index: 999;
+			#delete {
+				color: red;
+			}
+			#create {
+				color: green;
+			}
+			#edit {
+				color: $bootstrap_blue;
+				&.active {
+					color: white;
+				}
+				&.btn-info {
+					color: white;
+				}
+			}
+			.btn-toolbar {
+				float: left;
+			}
+			#edit-alert {
+				display: none;
+				width: 600px;
+				padding-right: 10px;
+				margin-left: 20px;
+				padding-top: 5px;
+				font-size: 0.9em;
+				background-color: white;
+				&.active {
+					display: inline-block;
+				}
+				&.alert {
+					margin-bottom: 0px;
+				}
+			}
+		}
+		div {
+			table {
+				margin-top: 110px;
+				font-size: 0.9em;
+				table-layout: auto;
+				word-wrap: break-word;
+				th {
+					font-size: 1em;
+					min-width: 10px;
+				}
+				td {
+					min-width: 10px;
+					&.centered {
+						text-align: center;
+					}
+				}
+			}
+		}
+	}
+	.divider {
+		height: 60px;
+	}
+}
+
+.purr {
+	position: fixed;
+	top: 30px;
+	right: 100px;
+	width: 250px;
+	padding: 20px;
+	background-color: #FCC;
+	border: solid 2px #666;
+	&:first-letter { text-transform: uppercase };
+}
+
+#newModal {
+	form {
+		margin-bottom: 0px;
+	}
+	.modal-body {
+		padding: 10px 5px 0px 5px;
+	}
+	.simple_form {
+		input {
+			height: 30px;
+		}
+		input, textarea {
+			font-size: 1em;
+			width: 100%;
+		}
+		textarea {
+			height: 100px;
+		}
+		.modal-footer {
+			padding: 5px 5px 5px;
+		}
+	}
+}
+
+#data-search-input {
+  position: fixed;
+  width: 100%;
+  top: 45px;
+  z-index: 999;
+}
+
+#delete-confirm {
+	z-index: 99999;
+}

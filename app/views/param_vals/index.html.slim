@@ -1,0 +1,12 @@
+= hidden_field_tag :direction, params[:direction]
+= hidden_field_tag :sort, params[:sort]
+= hidden_field_tag :page, params[:page]
+= hidden_field_tag :editable, params[:editable]
+
+
+#data-search-input
+  = render 'shim/search'
+  
+#data-table
+  = render 'param_vals/table'
+

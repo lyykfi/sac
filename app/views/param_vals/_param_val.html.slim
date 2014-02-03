@@ -1,0 +1,16 @@
+
+
+tr
+  td = check_box(param_val.id, 'selected', {class: 'check-row'})
+  -if can? :update, ParamVal
+    td = best_in_place_if @editable, param_val, :parameter_id, html_attrs: {style: "width: 100%;"}
+    td = best_in_place_if @editable, param_val, :subject_id, html_attrs: {style: "width: 100%;"}
+    td = best_in_place_if @editable, param_val, :val_numeric, html_attrs: {style: "width: 100%;"}
+    td = best_in_place_if @editable, param_val, :val_string, type: :textarea, html_attrs: {style: "width: 100%;"}
+    td = param_val.date_time
+  -else
+    td = param_val.parameter_id
+    td = param_val.subject_id
+    td = param_val.val_numeric
+    td = param_val.val_string
+    td = param_val.date_time

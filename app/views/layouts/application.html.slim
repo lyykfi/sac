@@ -1,0 +1,24 @@
+doctype
+html#html
+  head
+    title SacMiddle
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  body
+		- if signed_in?
+			= render 'shim/delete_confirm'
+			#modal
+			#header
+				.row-fluid
+					.span12
+						= render 'shim/header'
+			#content
+				.row-fluid
+					.span2
+						= render 'shim/side_menu'
+					.span10
+						= yield
+			#footer
+		- else
+			= yield
